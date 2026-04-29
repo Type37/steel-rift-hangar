@@ -11,6 +11,8 @@ import {urlDataStringToJson} from '../composables/url-data-parser.js';
 import {loadSaveFileData} from '../store/helpers/store-save-load.js';
 import {ROUTE_HOME} from '../router.js';
 import {toaster} from '../toaster.js';
+import SupportAssetWeapons from './ArmyEdit/ArmyList/ArmyListSupportAssets/SupportAssetWeapons.vue';
+import SupportAssetUnits from './ArmyEdit/ArmyList/ArmyListSupportAssets/SupportAssetUnits.vue';
 
 const {support_asset_units} = storeToRefs(useSupportAssetUnitsStore());
 
@@ -18,35 +20,31 @@ const router = useRouter();
 const route = useRoute();
 
 onMounted(() => {
-
   const dataString = route.query.payload;
-  if (!dataString) {
-    return;
-  }
+  if (!dataString) return;
   try {
     const json = urlDataStringToJson(dataString);
     loadSaveFileData(json);
-
-    router.push({name: ROUTE_HOME})
-        .then(() => {
-          toaster().info('Army List loaded from Data Url');
-        });
-
+    router.push({name: ROUTE_HOME}).then(() => {
+      toaster().info('Army List loaded from Data Url');
+    });
   } catch (error) {
-
-    router.push({name: ROUTE_HOME})
-        .then(() => {
-          toaster().validationError('Invalid Army List Data URL', error.message);
-        });
+    router.push({name: ROUTE_HOME}).then(() => {
+      toaster().validationError('Invalid Army List Data URL', error.message);
+    });
   }
 });
-
 </script>
 <template>
   <div class="container-lg pb-2">
     <ArmyList/>
     <UnitItem v-for="unit in support_asset_units" :key="unit.id" :support-asset-attachment-id="unit.id"/>
-    <MechTeamList/>
+    <MechTeamList>
+      <template #support-assets>
+        <SupportAssetWeapons/>
+        <SupportAssetUnits/>
+      </template>
+    </MechTeamList>
     <SecondaryAgendas/>
   </div>
 </template>
