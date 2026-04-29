@@ -186,10 +186,9 @@ svg.app-svg-icon { fill: var(--bs-body-color); }
 // ── Action bar ────────────────────────────────────────────────────────────────
 .action-bar {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 1rem 0;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
   flex-wrap: wrap;
 }
 
@@ -197,14 +196,146 @@ svg.app-svg-icon { fill: var(--bs-body-color); }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
 .action-bar-secondary {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+// ── Workspace split ───────────────────────────────────────────────────────────
+.mech-workspace {
+  display: block;
+
+  &.has-shelf {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1rem;
+    align-items: start;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.mech-main { min-width: 0; }
+
+.mech-shelf {
+  position: sticky;
+  top: 64px;
+  background: #fff;
+  border: 1px solid #e2e5e9;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.85rem;
+}
+
+// ── Mech row ──────────────────────────────────────────────────────────────────
+.card-mech .card-body { padding: 0; }
+
+.mech-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  min-height: 44px;
+}
+
+.btn-grab {
+  color: #aaa;
+  cursor: grab;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.3rem;
+  border-radius: 4px;
+  border: none;
+  background: none;
+  flex-shrink: 0;
+  transition: color 0.12s;
+
+  &:hover { color: #555; }
+  &:active { cursor: grabbing; }
+}
+
+.mech-size {
+  font-size: 0.72rem;
+  color: #888;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+
+.mech-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mech-stats {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: #666;
+  flex-shrink: 0;
+
+  strong { color: #222; }
+}
+
+.mech-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+// ── Mech action buttons ───────────────────────────────────────────────────────
+.mech-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  background: #f0f2f5;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, transform 0.08s;
+
+  .material-symbols-outlined { font-size: 1rem; }
+
+  &:hover { background: #e2e5e9; color: #111; }
+  &:active { transform: scale(0.88); background: #d0d3d8; }
+}
+
+.mech-btn-delete {
+  &:hover { background: #fee2e2; color: #dc2626; }
+  &:active { background: #fecaca; }
+}
+
+.mech-btn-copy {
+  &:hover { background: #e0f2fe; color: #0369a1; }
+  &:active { background: #bae6fd; }
+}
+
+.mech-btn-expand {
+  &.collapsed { opacity: 0.5; }
+}
+
+// ── Add HE-V / Add Team buttons ───────────────────────────────────────────────
+.add-hev-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  transition: transform 0.08s, box-shadow 0.12s;
+
+  &:active { transform: scale(0.95); }
 }
 
 // ── Section label ─────────────────────────────────────────────────────────────

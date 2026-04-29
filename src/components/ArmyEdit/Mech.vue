@@ -57,82 +57,36 @@ const showPreferredTeam = computed(() => teamId.value === TEAM_SHELF);
       }"
   >
     <div class="card-body">
-      <div class="row">
-        <div class="col-auto col-md-auto col-lg-2 ">
-          <span class="btn btn-sm btn-grab btn-transparent">:::</span>
-          <div class="d-inline-block py-1 ps-3">
-            HE-V {{ info.size.display_name }}
-          </div>
-        </div>
-        <div class="col-auto col-md-auto col-lg-4">
-          <IconPreferredTeam
-              btn-class="me-2"
-              :team-id="info.preferred_team_id"
-              :show="showPreferredTeam"
-          />
-          <div class="d-inline-block py-1">
-            <strong class="pe-1">{{ info.display_name }}</strong>
-          </div>
-          <IconValidationError
-              btn-class="ms-1"
-              title="HE-V Validation Errors"
-              icon="hev"
-              :message-array="invalidMechMessages"
-          />
-          <IconValidationError
-              btn-class="ms-1"
-              title="Team Group Validation Errors"
-              :icon="teamIcon"
-              :message-array="invalidTeamGroupMessages"
-          />
-        </div>
-        <div class="col-sm-12 col-md-auto col-lg-6 d-flex">
-          <div class="py-1 d-inline-block ms-auto">
-            <span class="pe-2">
-              <strong>Arm:</strong>
-              {{ info.armor_stat }}
-            </span>
-            <span class="px-2">
-              <strong>Str:</strong>
-              {{ info.structure_stat }}
-            </span>
-            <span class="px-2">
-              <strong>Slots: </strong>
-              <fraction :a="info.used_slots" :b="info.max_slots"/>
-            </span>
-            <span class="px-2">
-              <strong>Tons: </strong>
-              <fraction :a="info.used_tons" :b="info.max_tons"/>
-            </span>
-          </div>
+      <div class="mech-row">
+        <span class="btn-grab" title="Drag to reorder">:::</span>
+        <span class="mech-size">{{ info.size.display_name }}</span>
+        <span class="mech-name">
+          <IconPreferredTeam btn-class="me-1" :team-id="info.preferred_team_id" :show="showPreferredTeam"/>
+          <strong>{{ info.display_name }}</strong>
+          <IconValidationError btn-class="ms-1" title="HE-V Validation Errors" icon="hev" :message-array="invalidMechMessages"/>
+          <IconValidationError btn-class="ms-1" title="Team Group Validation Errors" :icon="teamIcon" :message-array="invalidTeamGroupMessages"/>
+        </span>
+        <span class="mech-stats">
+          <span>Arm <strong>{{ info.armor_stat }}</strong></span>
+          <span>Str <strong>{{ info.structure_stat }}</strong></span>
+          <span>Slots <strong><fraction :a="info.used_slots" :b="info.max_slots"/></strong></span>
+          <span>Tons <strong><fraction :a="info.used_tons" :b="info.max_tons"/></strong></span>
+        </span>
+        <span class="mech-actions">
           <BtnMoveMechToTeam :mech-id="mechId"/>
-          <BButton
-              size="sm"
-              class="ms-1"
-              variant="secondary"
-              @click="mechStore.duplicateMech(mechId)"
-          >
+          <button class="mech-btn mech-btn-copy" title="Duplicate" @click="mechStore.duplicateMech(mechId)">
             <span class="material-symbols-outlined">content_copy</span>
-          </BButton>
-
-          <BButton
-              size="sm"
-              class="ms-1"
-              variant="danger"
-              @click="mechStore.removeMech(mechId)"
-          >
+          </button>
+          <button class="mech-btn mech-btn-delete" title="Delete" @click="mechStore.removeMech(mechId)">
             <span class="material-symbols-outlined">delete</span>
-          </BButton>
-
-          <BButton
-              :class="'btn-collapse ms-1 ' + (visible ? null : 'collapsed')"
-              size="sm"
-              variant="transparent"
+          </button>
+          <button
+              :class="['mech-btn mech-btn-expand btn-collapse', visible ? null : 'collapsed']"
               :aria-expanded="visible ? 'true' : 'false'"
               :aria-controls="'collapse-' + mechId"
               @click="visible = !visible"
           />
-        </div>
+        </span>
       </div>
       <BCollapse
           :id="'collapse-' + mechId"

@@ -11,31 +11,32 @@ import {BButton} from 'bootstrap-vue-next';
 const teamStore = useTeamStore();
 const {special_teams} = storeToRefs(teamStore);
 const baseMechCount = computed(() => teamStore.getTeamMechCount(TEAM_GENERAL) || teamStore.getTeamMechCount(TEAM_SHELF));
+const shelfCount = computed(() => teamStore.getTeamMechCount(TEAM_SHELF));
 
 function addGeneralMech() {
   teamStore.addMechToTeamWithDefaults(TEAM_GENERAL, 'A');
 }
 </script>
 <template>
-  <MechTeamGroup :team-id="TEAM_SHELF" group-id="A" v-show="baseMechCount"/>
-  <MechTeamGroup :team-id="TEAM_GENERAL" group-id="A" v-show="baseMechCount"/>
-
   <div class="action-bar">
-    <div class="action-bar-primary">
-      <BButton variant="primary" size="lg" class="add-hev-cta" @click="addGeneralMech">
-        <Icon name="hev" size="28px" class="me-1"/>
-        Add Solo HE-V
-      </BButton>
-      <BtnAddTeam/>
-    </div>
-    <div class="action-bar-secondary">
-      <slot name="support-assets"/>
-    </div>
+    <BButton variant="primary" class="add-hev-cta" @click="addGeneralMech">
+      <Icon name="hev" size="20px" class="me-1"/>
+      Add Solo HE-V
+    </BButton>
+    <BtnAddTeam/>
+    <slot name="support-assets"/>
   </div>
 
-  <MechTeam v-for="team in special_teams" :key="team.id" :team-id="team.id"/>
-
-  <div class="d-flex justify-content-end mt-2" v-if="special_teams.length">
-    <BtnAddTeam/>
+  <div class="mech-workspace" :class="{'has-shelf': shelfCount}">
+    <div class="mech-main">
+      <MechTeamGroup :team-id="TEAM_GENERAL" group-id="A" v-show="baseMechCount"/>
+      <MechTeam v-for="team in special_teams" :key="team.id" :team-id="team.id"/>
+      <div class="d-flex justify-content-end mt-2" v-if="special_teams.length">
+        <BtnAddTeam/>
+      </div>
+    </div>
+    <div class="mech-shelf" v-if="shelfCount">
+      <MechTeamGroup :team-id="TEAM_SHELF" group-id="A"/>
+    </div>
   </div>
 </template>
