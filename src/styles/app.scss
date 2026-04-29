@@ -87,8 +87,73 @@ svg.app-svg-icon { fill: var(--bs-body-color); }
 .mech-stats > .row:nth-child(2n) { background-color: var(--bs-light-bg-subtle); }
 .p-gap:last-child { margin-bottom: 0; }
 
-// ── Army list sticky panel ────────────────────────────────────────────────────
-.card-army-list { position: sticky; top: 0; z-index: 99; }
+// ── App header ────────────────────────────────────────────────────────────────
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #111318;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.app-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.app-header-name {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.6rem;
+  width: 200px;
+  outline: none;
+
+  &::placeholder { color: rgba(255,255,255,0.35); }
+  &:focus {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.10);
+  }
+}
+
+.app-header-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.75);
+
+  strong { color: #fff; }
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+
+  .btn-outline-secondary {
+    --bs-btn-color: rgba(255,255,255,0.7);
+    --bs-btn-border-color: rgba(255,255,255,0.2);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: rgba(255,255,255,0.1);
+    --bs-btn-hover-border-color: rgba(255,255,255,0.4);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: rgba(255,255,255,0.15);
+    --bs-btn-active-border-color: rgba(255,255,255,0.4);
+  }
+}
+
+// ── Army list config panel ────────────────────────────────────────────────────
+// Not sticky — it's part of the page flow below the header
+.card-army-list { position: relative; }
 
 // ── Section label ─────────────────────────────────────────────────────────────
 .section-label {
