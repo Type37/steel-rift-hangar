@@ -294,7 +294,103 @@ svg.app-svg-icon { fill: var(--bs-body-color); }
   flex-shrink: 0;
 }
 
-// ── Mech action buttons ───────────────────────────────────────────────────────
+// ── Global button interactions ────────────────────────────────────────────────
+// Every .btn gets smooth transitions and a physical press feel.
+// Bootstrap's own transition only covers color/bg/border — we add transform.
+
+.btn {
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    transform 0.08s ease;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95) translateY(0);
+    box-shadow: none;
+  }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+// ── Add Solo HE-V ─────────────────────────────────────────────────────────────
+.add-hev-cta {
+  background-color: #DC4427;
+  border-color: #DC4427;
+  color: #fff;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 1rem;
+
+  &:hover:not(:disabled) {
+    background-color: #c23a1f;
+    border-color: #c23a1f;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(220, 68, 39, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    background-color: #a8331c !important;
+    border-color: #a8331c !important;
+    color: #fff !important;
+    box-shadow: none;
+    transform: scale(0.95) translateY(0);
+  }
+}
+
+// ── Add Team ──────────────────────────────────────────────────────────────────
+.add-team-cta {
+  background-color: #111318 !important;
+  border-color: #111318 !important;
+  color: #fff !important;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 1rem !important;
+
+  &:hover:not(:disabled) {
+    background-color: #2a2d36 !important;
+    border-color: #2a2d36 !important;
+    color: #fff !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25) !important;
+  }
+
+  &:active:not(:disabled) {
+    background-color: #3a3d47 !important;
+    border-color: #3a3d47 !important;
+    transform: scale(0.95) translateY(0) !important;
+    box-shadow: none !important;
+  }
+}
+
+// ── Drag handle ───────────────────────────────────────────────────────────────
+.btn-grab {
+  color: #bbb;
+  cursor: grab;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.3rem;
+  border-radius: 4px;
+  border: none;
+  background: none;
+  flex-shrink: 0;
+  transition: color 0.1s, background 0.1s;
+  user-select: none;
+
+  &:hover { color: #555; background: #eee; }
+  &:active { cursor: grabbing; }
+}
+
+// ── Mech row icon buttons ─────────────────────────────────────────────────────
 .mech-btn {
   display: inline-flex;
   align-items: center;
@@ -306,37 +402,55 @@ svg.app-svg-icon { fill: var(--bs-body-color); }
   background: #f0f2f5;
   color: #555;
   cursor: pointer;
-  transition: background 0.1s, color 0.1s, transform 0.08s;
+  transition: background 0.1s, color 0.1s, transform 0.08s, box-shadow 0.1s;
 
   .material-symbols-outlined { font-size: 1rem; }
 
-  &:hover { background: #e2e5e9; color: #111; }
-  &:active { transform: scale(0.88); background: #d0d3d8; }
+  &:hover {
+    background: #e2e5e9;
+    color: #111;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.85);
+    box-shadow: none;
+    background: #d0d3d8;
+  }
 }
 
 .mech-btn-delete {
-  &:hover { background: #fee2e2; color: #dc2626; }
+  &:hover { background: #fee2e2; color: #dc2626; box-shadow: 0 1px 4px rgba(220,38,38,0.2); }
   &:active { background: #fecaca; }
 }
 
 .mech-btn-copy {
-  &:hover { background: #e0f2fe; color: #0369a1; }
+  &:hover { background: #e0f2fe; color: #0369a1; box-shadow: 0 1px 4px rgba(3,105,161,0.2); }
   &:active { background: #bae6fd; }
 }
 
 .mech-btn-expand {
-  &.collapsed { opacity: 0.5; }
+  transition: background 0.1s, color 0.1s, transform 0.08s, opacity 0.15s;
+  &.collapsed { opacity: 0.4; }
+  &:hover { opacity: 1; }
 }
 
-// ── Add HE-V / Add Team buttons ───────────────────────────────────────────────
-.add-hev-cta {
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.4rem 1rem;
-  transition: transform 0.08s, box-shadow 0.12s;
+// ── Group header buttons (collapse all, expand all, toggle) ───────────────────
+.card-mech-team-group .card-header .btn,
+.card-mech-team .card-header .btn {
+  transition: background 0.1s, color 0.1s, transform 0.08s;
 
-  &:active { transform: scale(0.95); }
+  &:active { transform: scale(0.88); }
 }
+
+// ── Dropdown items ────────────────────────────────────────────────────────────
+.dropdown-item {
+  transition: background 0.1s, color 0.1s, transform 0.06s;
+
+  &:active { transform: scale(0.98); }
+}
+
 
 // ── Section label ─────────────────────────────────────────────────────────────
 .section-label {
