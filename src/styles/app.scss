@@ -1,0 +1,117 @@
+// ── app.scss ──────────────────────────────────────────────────────────────────
+// New from scratch. No legacy cruft.
+// Rule of thumb: if it isn't broken without it, don't add it.
+
+// ── Popover ───────────────────────────────────────────────────────────────────
+:root {
+  --bs-popover-header-color: var(--bs-body-color);
+}
+
+[data-bs-theme=dark] {
+  --bs-border-color-translucent: rgba(255, 255, 255, .3);
+  --bs-popover-header-color: var(--bs-body-color);
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+.ws-pre-wrap { white-space: pre-wrap; }
+
+// ── Material Symbols ──────────────────────────────────────────────────────────
+.material-symbols-outlined {
+  vertical-align: -.2em;
+  font-size: 1.2rem;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 1, 'opsz' 24;
+}
+
+.btn-sm .material-symbols-outlined,
+.btn-group-sm > .btn .material-symbols-outlined {
+  vertical-align: -.3em;
+}
+
+// ── SVG icons ─────────────────────────────────────────────────────────────────
+svg.app-svg-icon { fill: var(--bs-body-color); }
+.btn:hover svg.app-svg-icon    { fill: var(--bs-btn-hover-color); }
+.btn:active svg.app-svg-icon   { fill: var(--bs-btn-active-color); }
+.btn svg.app-svg-icon          { fill: var(--bs-btn-color); }
+
+// ── DnD ───────────────────────────────────────────────────────────────────────
+.dndrop-container.vertical > .dndrop-draggable-wrapper { overflow: visible !important; }
+.mech-drag-wrapper { padding-top: .25rem; padding-bottom: .25rem; }
+
+// ── Print hide ────────────────────────────────────────────────────────────────
+@media print {
+  .app-header, .no-print { display: none; }
+  grammarly-desktop-integration { display: none; }
+}
+
+// ── Navbar ────────────────────────────────────────────────────────────────────
+.navbar > .container,
+.navbar > .container-fluid,
+.navbar > .container-sm,
+.navbar > .container-md,
+.navbar > .container-lg,
+.navbar > .container-xl,
+.navbar > .container-xxl {
+  display: block;
+}
+
+// ── Nav tabs ──────────────────────────────────────────────────────────────────
+.nav-tabs-factions {
+  --bs-nav-link-font-size: 1rem;
+  --bs-nav-link-padding-y: .5rem;
+}
+
+.tab-select-faction {
+  font-weight: 500;
+  --bs-nav-link-disabled-color: #000;
+}
+
+[data-bs-theme=dark] .tab-select-faction {
+  --bs-nav-link-disabled-color: #fff;
+}
+
+// ── Number formatting ─────────────────────────────────────────────────────────
+.number-cell     { text-align: right; }
+.number-zero     { opacity: .5; }
+.number-positive { color: var(--bs-success-text-emphasis); }
+.number-negative { color: var(--bs-danger); }
+
+[data-bs-theme=dark] .number-negative { color: var(--bs-danger-text-emphasis); }
+
+// ── Trait/offcanvas ───────────────────────────────────────────────────────────
+.trait-list-p { margin-bottom: 1rem; }
+.trait-list-p:last-child { margin-bottom: 0; }
+.offcanvas-body { padding-top: 0; }
+.text-tooltip:hover { text-decoration: underline; cursor: pointer; }
+
+// ── Mech stats zebra ──────────────────────────────────────────────────────────
+.mech-stats > .row:nth-child(2n) { background-color: var(--bs-light-bg-subtle); }
+.p-gap:last-child { margin-bottom: 0; }
+
+// ── Army list sticky panel ────────────────────────────────────────────────────
+.card-army-list { position: sticky; top: 0; z-index: 99; }
+
+// ── Section label ─────────────────────────────────────────────────────────────
+.section-label {
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: .6;
+}
+
+// ── Dropdown table ────────────────────────────────────────────────────────────
+.dropdown-table .dropdown-menu { min-width: 620px; }
+.dropdown.dropdown-block .dropdown-menu { width: 100%; }
+
+// ── HEV import ────────────────────────────────────────────────────────────────
+.import-hev-container { padding-left: 20px; padding-right: 20px; }
+.import-hev-container > .card { width: 346px; }
+.import-hev-container > .card > .card-body {
+  height: 480.4px;
+  padding: 5px;
+}
+.import-hev-container > .card > .card-body .output-container .game-card {
+  outline: 0;
+  transform: scale(1.4);
+  transform-origin: top left;
+}
