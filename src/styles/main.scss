@@ -79,7 +79,6 @@ $dropdown-link-active-bg: darken(#f8f9fa, 7%);
 @import "page-cards-print";
 @import "page-reference-print";
 
-@import "fluent";
 
 
 :root {
@@ -296,5 +295,4 @@ body[data-bs-theme="dark"] {
   min-width: 620px;
 }
 
-@import "theme-clean";
 

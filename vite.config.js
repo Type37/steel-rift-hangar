@@ -7,7 +7,7 @@ import path from 'path';
 import vitePluginSvgsIcons from 'vite-plugin-svgs-icons';
 
 export default defineConfig({
-    base: '/Steel-Rift-Hangar-WL/',
+    base: '/steel-rift-hangar/',
     build: {
         outDir: 'dist',
     },
